@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A simple map</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { 
+  margin:0; 
+  padding:0; 
+  }
+  #map { 
+  position:absolute; 
+  top:0; 
+  bottom:0; 
+  width:100%; }
+</style>
+</head>
+<body>
+
+<div id='map' class="dark"></div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1Ijoia2FyZW5ib3dtYW4iLCJhIjoiYWJlMDc3MjlmYTFkYTliYjRlNzI2ZDFhYmFjNjkzMTIifQ.Omjc0GCIPz0BHyd-EsU0AA';
+var map = L.mapbox.map('map', 'mapbox.dark')
+    .setView([40, -94.50], 4);
+	
+//-----------markers!!!!---------
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+var geoJson = [{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-122.071123 , 37.412505]
+    },
+    "properties": {
+        "title": "Girls Who Code Camp",
+        "icon": {
+            "iconUrl": "http://food-safety.org.uk/image/data/how_it_works.png",
+            "iconSize": [100, 100], // size of the icon
+            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, 0], // point from which the popup should open relative to the iconAnchor
+            "className": "dot"
+        }
+    }
+}, 
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-122.141161, 37.445971]
+    },
+    "properties": {
+        "title": "Home",
+        "icon": {
+            "iconUrl": "http://www.rubyscafe.com.au/images/home-icon-png-transparent-4919.png",
+            "iconSize": [80, 80], // size of the icon
+            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, 0], // point from which the popup should open relative to the iconAnchor
+            "className": "dot"
+        }
+    }
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-71.095762, 42.359939]
+    },
+    "properties": {
+        "title": "MIT",
+        "icon": {
+            "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/License_icon-mit.svg/256px-License_icon-mit.svg.png",
+            "iconSize": [80, 80], // size of the icon
+            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, 0], // point from which the popup should open relative to the iconAnchor
+            "className": "dot"
+        }
+    }
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-122.155066, 37.437453]
+    },
+    "properties": {
+        "title": "Home",
+        "icon": {
+            "iconUrl": "http://www.misskatecuttables.com/uploads/shopping_cart/9327/med_school-owl.png",
+            "iconSize": [100, 100],
+            "iconAnchor": [50, 50],
+            "popupAnchor": [0, 0],
+            "className": "dot"
+        }
+    }
+}];
+
+// Set a custom icon on each marker based on feature properties.
+myLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    marker.setIcon(L.icon(feature.properties.icon));
+});
+
+// Add features to the map.
+myLayer.setGeoJSON(geoJson);
+</script>
+</body>
+</html>
+
+
